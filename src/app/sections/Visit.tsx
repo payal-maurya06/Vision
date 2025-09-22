@@ -45,7 +45,7 @@ function Visit() {
 
   return (
     <motion.div
-      className="relative w-full font-roboto text-gray-800 overflow-x-hidden"
+      className="relative w-full h-screen font-roboto text-gray-800 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
@@ -58,15 +58,15 @@ function Visit() {
         <img
           src="https://seeeyewear.com/cdn/shop/files/Web_Loyalty_Desktop_1800x800_85c32007-2c36-4fef-b6e5-d9500d8bc700_1000x.webp?v=1664526952"
           alt="See Eyewear optical store interior"
-          className="w-full h-full object-cover bg-black/95"
+          className="w-full h-full object-cover"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-black/50" />
       </motion.div>
 
       {/* Content */}
-      <motion.div className="relative px-6 py-24 flex items-center justify-center">
-        <div className="max-w-4xl text-center text-white">
+      <div className="relative h-full flex items-center justify-center px-6">
+        <motion.div className="max-w-4xl text-center text-white">
           <motion.h2 id="visit-heading" className="text-4xl font-bold mb-4" variants={textVariants}>
             Experience Excellence
           </motion.h2>
@@ -99,8 +99,8 @@ function Visit() {
               Book Appointment
             </motion.button>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* Reduced motion accessibility */}
       <style jsx>{`
