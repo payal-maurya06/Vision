@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef } from "react";
-import { motion, useInView, useAnimation, Variants, Transition, Easing } from 'framer-motion'; // Import Easing
+import { motion, useInView, useAnimation } from 'framer-motion';
 
 function Eyewear() {
   const eyewearItems = [
@@ -74,11 +74,8 @@ function Eyewear() {
     },
   ];
 
-  // Define the cubic-bezier array explicitly as Easing
-  const professionalEase: Easing = [0.22, 1, 0.36, 1];
-
-  // Framer Motion Variants
-  const containerVariants: Variants = {
+  // Framer Motion Variants (unchanged)
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -89,7 +86,7 @@ function Eyewear() {
     },
   };
 
-  const headingVariants: Variants = {
+  const headingVariants = {
     hidden: { 
       opacity: 0, 
       y: 20, 
@@ -101,12 +98,12 @@ function Eyewear() {
       filter: 'blur(0px)',
       transition: { 
         duration: 0.6, 
-        ease: professionalEase // Use the explicitly typed ease
+        ease: [0.22, 1, 0.36, 1] // Professional ease-in-out
       } 
     },
   };
 
-  const itemVariants: Variants = {
+  const itemVariants = {
     hidden: { 
       opacity: 0, 
       y: 30, 
@@ -118,25 +115,18 @@ function Eyewear() {
       filter: 'blur(0px)',
       transition: { 
         duration: 0.8, 
-        ease: professionalEase // Use the explicitly typed ease
+        ease: [0.22, 1, 0.36, 1] 
       } 
     },
   };
 
-  const textVariants: Variants = {
-    hidden: itemVariants.hidden,
-    visible: {
-      ...itemVariants.visible,
-      transition: { duration: 0.6, ease: professionalEase }, // Ensure ease is typed here too
-    },
+  const textVariants = {
+    ...itemVariants,
+    transition: { duration: 0.6 },
   };
 
-  const buttonVariants: Variants = {
-    hidden: itemVariants.hidden,
-    visible: {
-      ...itemVariants.visible,
-      transition: { duration: 0.8, ease: professionalEase }, // Ensure ease is typed here too
-    },
+  const buttonVariants = {
+    ...itemVariants,
     hover: { scale: 1.05 },
     tap: { scale: 0.95 },
   };
@@ -144,18 +134,15 @@ function Eyewear() {
   // Scroll Trigger Refs and Controls
   const headingRef = useRef(null);
   const headingControls = useAnimation();
-  // Changed threshold to amount
-  const headingInView = useInView(headingRef, { amount: 0.3, margin: "-100px 0px" });
+  const headingInView = useInView(headingRef, { threshold: 0.3, margin: "-100px 0px" });
 
   const gridRef = useRef(null);
   const gridControls = useAnimation();
-  // Changed threshold to amount
-  const gridInView = useInView(gridRef, { amount: 0.3, margin: "-100px 0px" });
+  const gridInView = useInView(gridRef, { threshold: 0.3, margin: "-100px 0px" });
 
   const exploreRef = useRef(null);
   const exploreControls = useAnimation();
-  // Changed threshold to amount
-  const exploreInView = useInView(exploreRef, { amount: 0.3, margin: "-100px 0px" });
+  const exploreInView = useInView(exploreRef, { threshold: 0.3, margin: "-100px 0px" });
 
   // Effects to Trigger Animations on Scroll
   useEffect(() => {
@@ -244,6 +231,7 @@ function Eyewear() {
             {/* Info */}
             <motion.div 
               className="mt-6"
+              // Removed variants={textVariants} from here
             >
               <motion.p 
                 className="text-sm text-gray-500"
@@ -297,7 +285,7 @@ function Eyewear() {
       <motion.div 
         ref={exploreRef}
         className="text-center mt-16"
-        variants={textVariants} // This div itself will animate with textVariants
+        variants={textVariants}
         initial="hidden"
         animate={exploreControls}
         transition={{ delay: 0.5 }}
