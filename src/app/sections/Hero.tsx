@@ -27,7 +27,7 @@ function Hero() {
     },
   ];
 
-  // Framer Motion Variants
+  // Framer Motion Variants with proper easing types
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -45,7 +45,10 @@ function Hero() {
       opacity: 1, 
       y: 0, 
       filter: 'blur(0px)',
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+      transition: { 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1] as const 
+      }
     },
   };
 
@@ -53,19 +56,36 @@ function Hero() {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
-      transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } 
+      transition: { 
+        duration: 1, 
+        ease: [0.22, 1, 0.36, 1] as const 
+      } 
     },
   };
 
   // Button variants
   const leftButtonVariants = {
     hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 2, ease: [0.22, 1, 0.36, 1] } },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { 
+        duration: 2, 
+        ease: [0.22, 1, 0.36, 1] as const 
+      } 
+    },
   };
 
   const rightButtonVariants = {
     hidden: { opacity: 0, x: 100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 2, ease: [0.22, 1, 0.36, 1] } },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { 
+        duration: 2, 
+        ease: [0.22, 1, 0.36, 1] as const 
+      } 
+    },
   };
 
   useEffect(() => {
@@ -136,7 +156,7 @@ function Hero() {
             variants={rightButtonVariants}
             initial="hidden"
             animate="visible"
-            whileHover={{ scale: 1.05 }}
+            
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 border-2 border-white hover:bg-white hover:text-[#775647] font-semibold transition-colors"
           >
