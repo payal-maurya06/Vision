@@ -54,7 +54,7 @@ function About() {
 
   const listItemVariants = {
     hidden: { opacity: 0, x: -10, filter: "blur(3px)" },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       x: 0,
       filter: "blur(0px)",
@@ -75,7 +75,7 @@ function About() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      variants={containerVariants}
+      variants={containerVariants as any}
       role="main"
       aria-labelledby="about-heading"
     >
@@ -121,7 +121,7 @@ function About() {
         {/* Left Side - Image */}
         <motion.div
           className="relative w-full h-[auto] overflow-hidden"
-          variants={imageVariants}
+          variants={imageVariants as any}
           whileHover={{ scale: 1.05 }} // Enhanced hover
           transition={{ duration: 0.5 }}
         >
@@ -136,13 +136,13 @@ function About() {
         {/* Right Side - Text */}
         <motion.div
           className="flex flex-col justify-center bg-gray-50 p-10 h-full"
-          variants={staggerContainer}
+          variants={staggerContainer as any}
           aria-labelledby="about-heading"
         >
           {/* Badge */}
           <motion.span
-            className="inline-block bg-[#775647]/10 text-[#775647] px-4 py-1 text-sm font-medium tracking-wide mb-4 w-max rounded"
-            variants={badgeVariants}
+            className="inline-block bg-[#775647]/10 text-[#775647] px-4 py-1 text-sm font-medium tracking-wide mb-4 w-max"
+            variants={badgeVariants as any}
             lang="en"
           >
             Trusted Eye Care in Aligarh
@@ -151,14 +151,14 @@ function About() {
           <motion.h2
             id="about-heading"
             className="text-4xl font-bold mb-6 text-gray-900"
-            variants={textVariants}
+            variants={textVariants as any}
           >
             About Shreya Vision Care
           </motion.h2>
           
           <motion.p
             className="text-base text-gray-700 mb-4 leading-relaxed"
-            variants={textVariants}
+            variants={textVariants as any}
           >
             <span className="font-semibold">Shreya Vision Care</span> is an 
             optometry-led clinic and optical retail center in{" "}
@@ -170,7 +170,7 @@ function About() {
           
           <motion.ul
             className="list-disc list-inside text-gray-700 space-y-1 mb-4 text-base"
-            variants={staggerContainer}
+            variants={staggerContainer as any}
           >
             {[
               "Eye exams for all age groups",
@@ -181,7 +181,7 @@ function About() {
               <motion.li
                 key={i}
                 className="leading-relaxed"
-                variants={listItemVariants}
+                variants={listItemVariants as any}
                 custom={i}
               >
                 {item}
@@ -191,7 +191,7 @@ function About() {
           
           <motion.p
             className="text-base text-gray-700 leading-relaxed mb-6"
-            variants={textVariants}
+            variants={textVariants as any}
           >
             Our focus is on accurate prescriptions, advanced protection, and 
             clear, comfortable vision for every patient.
@@ -199,7 +199,7 @@ function About() {
           
           <motion.h3
             className="text-lg font-semibold text-[#775647] mb-6"
-            variants={textVariants}
+            variants={textVariants as any}
           >
             Shreya Vision Care – Where Optometry Meets Excellence.
           </motion.h3>
@@ -207,7 +207,7 @@ function About() {
           {/* Read More Button */}
           <motion.button
             className="px-6 py-2 border border-gray-700 text-gray-700 font-medium hover:bg-[#775647] hover:text-white transition-colors w-max"
-            variants={buttonVariants}
+            variants={buttonVariants as any}
             whileHover="hover"
             aria-label="Read more about Shreya Vision Care"
           >
