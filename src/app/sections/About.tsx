@@ -74,7 +74,7 @@ function About() {
       className="relative min-h-screen w-full font-roboto text-gray-800 px-6 py-16"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-100px" }} // <-- This is the scroll trigger
       variants={containerVariants as any}
       role="main"
       aria-labelledby="about-heading"
@@ -117,7 +117,7 @@ function About() {
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-0 items-center">
-        
+
         {/* Left Side - Image */}
         <motion.div
           className="relative w-full h-[auto] overflow-hidden"
@@ -155,19 +155,19 @@ function About() {
           >
             About Shreya Vision Care
           </motion.h2>
-          
+
           <motion.p
             className="text-base text-gray-700 mb-4 leading-relaxed"
             variants={textVariants as any}
           >
-            <span className="font-semibold">Shreya Vision Care</span> is an 
+            <span className="font-semibold">Shreya Vision Care</span> is an
             optometry-led clinic and optical retail center in{" "}
             <span className="font-semibold">Aligarh</span>, founded by{" "}
-            <span className="font-semibold">Optometrist Ashish Bhatnagar</span>. 
-            We provide advanced eye care with modern technology and expert 
+            <span className="font-semibold">Optometrist Ashish Bhatnagar</span>.
+            We provide advanced eye care with modern technology and expert
             clinical knowledge.
           </motion.p>
-          
+
           <motion.ul
             className="list-disc list-inside text-gray-700 space-y-1 mb-4 text-base"
             variants={staggerContainer as any}
@@ -188,15 +188,15 @@ function About() {
               </motion.li>
             ))}
           </motion.ul>
-          
+
           <motion.p
             className="text-base text-gray-700 leading-relaxed mb-6"
             variants={textVariants as any}
           >
-            Our focus is on accurate prescriptions, advanced protection, and 
+            Our focus is on accurate prescriptions, advanced protection, and
             clear, comfortable vision for every patient.
           </motion.p>
-          
+
           <motion.h3
             className="text-lg font-semibold text-[#775647] mb-6"
             variants={textVariants as any}

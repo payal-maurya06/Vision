@@ -88,14 +88,16 @@ function Brand() {
       className="py-16 bg-gray-100 font-['Roboto'] min-h-[200px]"
       variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      whileInView="visible" // Trigger animation when in view
+      viewport={{ once: true, amount: 0.3 }} // Animate once when 30% in view
     >
       {/* Heading */}
       <motion.h2 
         className="text-center text-2xl font-bold text-gray-800 mb-10"
         variants={headingVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible" // Trigger animation when in view
+        viewport={{ once: true, amount: 0.3 }} // Animate once when 30% in view
       >
         Trusted by World-Class Brands
       </motion.h2>
@@ -104,9 +106,10 @@ function Brand() {
       <div className="relative overflow-hidden">
         <motion.div 
           className="flex animate-marquee whitespace-nowrap"
-          variants={containerVariants}
+          variants={containerVariants} // Using containerVariants for stagger and delay
           initial="hidden"
-          animate="visible"
+          whileInView="visible" // Trigger animation when in view
+          viewport={{ once: true, amount: 0.3 }} // Animate once when 30% in view
           transition={{ staggerChildren: 0.1, delayChildren: 0.3 }}
         >
           {duplicatedLogos.map((logo, index) => (
@@ -114,13 +117,13 @@ function Brand() {
               key={index}
               className="flex-shrink-0 px-6 sm:px-12 flex items-center justify-center"
               variants={logoVariants}
-              
+              // No need for initial/animate here, as parent's staggerChildren will handle it
             >
               <motion.img
                 src={logo.src}
                 alt={logo.alt}
                 className="h-10 sm:h-12 w-auto grayscale hover:grayscale-0 transition duration-300"
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 0 }} // Keep initial opacity for individual image fade-in
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
                 loading="lazy"

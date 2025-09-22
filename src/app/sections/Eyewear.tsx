@@ -1,6 +1,6 @@
 'use client'
-import React, { useEffect, useRef } from "react";
-import { motion, useInView, useAnimation, easeOut } from 'framer-motion';
+import React from "react";
+import { motion, easeOut } from 'framer-motion';
 
 function Eyewear() {
   const eyewearItems = [
@@ -74,7 +74,7 @@ function Eyewear() {
     },
   ];
 
-  // Framer Motion Variants (fixed)
+  // Framer Motion Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -152,57 +152,19 @@ function Eyewear() {
         ease: easeOut
       } 
     },
-    hover: { scale: 1.05 },
+    
     tap: { scale: 0.95 },
   };
-
-  // Scroll Trigger Refs and Controls
-  const headingRef = useRef(null);
-  const headingControls = useAnimation();
-  const headingInView = useInView(headingRef, { margin: "-100px 0px" });
-
-  const gridRef = useRef(null);
-  const gridControls = useAnimation();
-  const gridInView = useInView(gridRef, { margin: "-100px 0px" });
-
-  const exploreRef = useRef(null);
-  const exploreControls = useAnimation();
-  const exploreInView = useInView(exploreRef, { margin: "-100px 0px" });
-
-  // Effects to Trigger Animations on Scroll
-  useEffect(() => {
-    if (headingInView) {
-      headingControls.start("visible");
-    } else {
-      headingControls.set("hidden");
-    }
-  }, [headingInView, headingControls]);
-
-  useEffect(() => {
-    if (gridInView) {
-      gridControls.start("visible");
-    } else {
-      gridControls.set("hidden");
-    }
-  }, [gridInView, gridControls]);
-
-  useEffect(() => {
-    if (exploreInView) {
-      exploreControls.start("visible");
-    } else {
-      exploreControls.set("hidden");
-    }
-  }, [exploreInView, exploreControls]);
 
   return (
     <div className="font-['Roboto'] py-16 px-4 sm:px-6 bg-white">
       {/* Heading */}
       <motion.div 
-        ref={headingRef}
         className="text-center mb-14 max-w-2xl mx-auto"
-        variants={headingVariants}
+        variants={containerVariants}
         initial="hidden"
-        animate={headingControls}
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
       >
         <motion.p 
           className="text-sm uppercase tracking-widest text-gray-500"
@@ -227,18 +189,18 @@ function Eyewear() {
 
       {/* Grid */}
       <motion.div
-        ref={gridRef}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto"
         variants={containerVariants}
         initial="hidden"
-        animate={gridControls}
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
       >
         {eyewearItems.map((item, index) => (
           <motion.div
             key={index}
             className="group text-center flex flex-col items-center"
             variants={itemVariants}
-            whileHover="hover"
+            
           >
             {/* Image */}
             <div className="w-full h-48 flex items-center justify-center overflow-hidden">
@@ -246,9 +208,6 @@ function Eyewear() {
                 src={item.image}
                 alt={item.name}
                 className="object-contain max-h-full transition-transform duration-500 group-hover:scale-105"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
                 loading="lazy"
               />
             </div>
@@ -302,17 +261,17 @@ function Eyewear() {
 
       {/* Explore Button */}
       <motion.div 
-        ref={exploreRef}
         className="text-center mt-16"
         variants={textVariants}
         initial="hidden"
-        animate={exploreControls}
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
         transition={{ delay: 0.5 }}
       >
         <motion.button 
           className="px-8 py-3 bg-[#775647] text-white text-base font-medium hover:bg-[#4b2a1b] transition"
           variants={buttonVariants}
-          whileHover="hover"
+          
           whileTap="tap"
         >
           Explore Full Collection →

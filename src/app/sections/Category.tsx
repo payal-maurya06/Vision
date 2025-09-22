@@ -1,6 +1,6 @@
 'use client'
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation, cubicBezier } from 'framer-motion'; // Import cubicBezier
+import React from 'react';
+import { motion } from 'framer-motion';
 
 function Category() {
   // Framer Motion Variants
@@ -27,7 +27,7 @@ function Category() {
       filter: 'blur(0px)',
       transition: {
         duration: 0.6,
-        ease: cubicBezier(0.22, 1, 0.36, 1) // Professional ease-in-out
+        ease: [0.22, 1, 0.36, 1] as const
       }
     },
   };
@@ -44,7 +44,7 @@ function Category() {
       filter: 'blur(0px)',
       transition: {
         duration: 0.8,
-        ease: cubicBezier(0.22, 1, 0.36, 1)
+        ease: [0.22, 1, 0.36, 1] as const
       }
     },
   };
@@ -55,36 +55,8 @@ function Category() {
     tap: { scale: 0.95 },
   };
 
-  // Scroll Trigger Refs and Controls
-  const headingRef = useRef(null);
-  const headingControls = useAnimation();
-  // Changed threshold to amount
-  const headingInView = useInView(headingRef, { amount: 0.3, margin: "-100px 0px" });
-
-  const gridRef = useRef(null);
-  const gridControls = useAnimation();
-  // Changed threshold to amount
-  const gridInView = useInView(gridRef, { amount: 0.3, margin: "-100px 0px" });
-
-  // Effects to Trigger Animations on Scroll
-  useEffect(() => {
-    if (headingInView) {
-      headingControls.start("visible");
-    } else {
-      headingControls.set("hidden");
-    }
-  }, [headingInView, headingControls]);
-
-  useEffect(() => {
-    if (gridInView) {
-      gridControls.start("visible");
-    } else {
-      gridControls.set("hidden");
-    }
-  }, [gridInView, gridControls]);
-
   return (
-    <div className="font-['Roboto'] relative overflow-x-hidden"> {/* Added overflow-x-hidden */}
+    <div className="font-['Roboto'] relative overflow-x-hidden">
       <div className="min-h-screen w-full py-12 px-4 sm:px-6 bg-white relative">
         {/* Diagonal Stripes Background */}
         <div
@@ -100,15 +72,13 @@ function Category() {
           className="relative z-10"
           variants={containerVariants}
           initial="hidden"
-          animate={gridControls}
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
         >
           {/* Heading */}
           <motion.div
-            ref={headingRef}
             className="text-center mb-10"
             variants={headingVariants}
-            initial="hidden"
-            animate={headingControls}
           >
             <motion.h2 className="text-3xl font-bold text-gray-800">
               Shop by Category
@@ -120,11 +90,8 @@ function Category() {
 
           {/* Categories Grid */}
           <motion.div
-            ref={gridRef}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
             variants={containerVariants}
-            initial="hidden"
-            animate={gridControls}
           >
             {/* Sunglasses */}
             <motion.div
