@@ -53,7 +53,7 @@ function Testimonial() {
     },
   ];
 
-  const renderStars = (count) =>
+  const renderStars = (count: number) =>
     Array.from({ length: count }, (_, i) => (
       <span
         key={i}
