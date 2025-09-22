@@ -1,15 +1,28 @@
 'use client'
 import React, { useEffect, useRef, useState } from "react";
 
+interface StatItem {
+  value: number;
+  label: string;
+  icon: React.ReactNode;
+}
+
+interface CounterCardProps {
+  value: number;
+  label: string;
+  icon: React.ReactNode;
+  visible: boolean;
+}
+
 function Counting() {
-  const stats = [
+  const stats: StatItem[] = [
     { 
       value: 100000, 
       label: "Worldwide Delivery",
-      icon: (<div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-            <img src="/icons/i_truck.png" alt="" />
-      </div>
-        
+      icon: (
+        <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
+          <img src="/icons/i_truck.png" alt="Truck icon" />
+        </div>
       )
     },
     { 
@@ -17,8 +30,8 @@ function Counting() {
       label: "Satisfied Customers",
       icon: (
         <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-            <img src="/icons/i_smile.png" alt="" />
-      </div>
+          <img src="/icons/i_smile.png" alt="Smile icon" />
+        </div>
       )
     },
     { 
@@ -26,8 +39,8 @@ function Counting() {
       label: "Excellence Awards",
       icon: (
         <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-            <img src="/icons/i_trophy.png" alt="" />
-      </div>
+          <img src="/icons/i_trophy.png" alt="Trophy icon" />
+        </div>
       )
     },
     { 
@@ -35,14 +48,14 @@ function Counting() {
       label: "Perfect Pairs Crafted",
       icon: (
         <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-            <img src="/icons/i_glass.png" alt="" />
-      </div>
+          <img src="/icons/i_glass.png" alt="Glasses icon" />
+        </div>
       )
     },
   ];
 
   const [visible, setVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -53,7 +66,9 @@ function Counting() {
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
+    return () => { 
+      if (sectionRef.current) observer.unobserve(sectionRef.current); 
+    };
   }, []);
 
   return (
@@ -76,7 +91,7 @@ function Counting() {
   );
 }
 
-function CounterCard({ value, label, icon, visible }) {
+function CounterCard({ value, label, icon, visible }: CounterCardProps) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -97,10 +112,10 @@ function CounterCard({ value, label, icon, visible }) {
     return () => clearInterval(timer);
   }, [visible, value]);
 
-  const formatValue = (val) => {
+  const formatValue = (val: number) => {
     if (value >= 1000000) return `${(val / 1000000).toFixed(1)}M+`;
     if (value >= 1000) return `${(val / 1000).toFixed(1)}K+`;
-    return val;
+    return val.toString();
   };
 
   return (

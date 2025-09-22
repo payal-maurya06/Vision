@@ -42,7 +42,7 @@ function Brand() {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] // Professional ease-in-out
+        ease: [0.22, 1, 0.36, 1] as const // Use const assertion
       },
     },
   };
@@ -59,7 +59,7 @@ function Brand() {
       filter: 'blur(0px)',
       transition: { 
         duration: 0.6, 
-        ease: [0.22, 1, 0.36, 1] 
+        ease: [0.22, 1, 0.36, 1] as const // Use const assertion
       } 
     },
   };
@@ -76,7 +76,7 @@ function Brand() {
       filter: 'blur(0px)',
       transition: { 
         duration: 0.5, 
-        ease: [0.22, 1, 0.36, 1] 
+        ease: [0.22, 1, 0.36, 1] as const // Use const assertion
       } 
     },
   };
