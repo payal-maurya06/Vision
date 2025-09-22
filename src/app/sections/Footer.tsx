@@ -9,7 +9,7 @@ function Footer() {
     visible: {
       opacity: 1,
       filter: "blur(0px)",
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: "easeOut" as const },
     },
   };
 
@@ -24,11 +24,11 @@ function Footer() {
 
   const columnVariants = {
     hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.5, ease: "easeOut", delay: i * 0.1 },
+      transition: { duration: 0.5, ease: "easeOut" as const, delay: i * 0.1 },
     }),
   };
 
@@ -37,7 +37,7 @@ function Footer() {
     visible: {
       opacity: 1,
       filter: "blur(0px)",
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" as const },
     },
   };
 
@@ -47,7 +47,7 @@ function Footer() {
       opacity: 1,
       x: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.3, ease: "easeOut" },
+      transition: { duration: 0.3, ease: "easeOut" as const },
     },
     hover: {
       color: "#ffffff",
@@ -57,16 +57,16 @@ function Footer() {
 
   const socialVariants = {
     hidden: { opacity: 0, scale: 0.8, filter: "blur(4px)" },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      transition: { duration: 0.4, ease: "easeOut", delay: i * 0.1 },
+      transition: { duration: 0.4, ease: "easeOut" as const, delay: i * 0.1 },
     }),
     hover: {
       opacity: 0.8,
       scale: 1.1,
-      transition: { duration: 0.2, ease: "easeInOut" },
+      transition: { duration: 0.2, ease: "easeInOut" as const },
     },
   };
 
@@ -76,7 +76,7 @@ function Footer() {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: "easeOut" as const },
     },
   };
 
@@ -86,7 +86,7 @@ function Footer() {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.4, ease: "easeOut", delay: 0.8 },
+      transition: { duration: 0.4, ease: "easeOut" as const, delay: 0.8 },
     },
   };
 
@@ -157,7 +157,7 @@ function Footer() {
           <motion.h3 className="font-semibold mb-4" variants={textVariants}>
             Quick Links
           </motion.h3>
-          <a
+          <motion.a
             href="#about"
             className="text-gray-300 mb-2 hover:text-white transition-colors"
             variants={linkVariants}
@@ -165,8 +165,8 @@ function Footer() {
             aria-label="Navigate to About Us section"
           >
             About Us
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#services"
             className="text-gray-300 mb-2 hover:text-white transition-colors"
             variants={linkVariants}
@@ -174,8 +174,8 @@ function Footer() {
             aria-label="Navigate to Services section"
           >
             Services
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#visit"
             className="text-gray-300 mb-2 hover:text-white transition-colors"
             variants={linkVariants}
@@ -183,8 +183,8 @@ function Footer() {
             aria-label="Navigate to Visit Us section"
           >
             Visit Us
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#contact"
             className="text-gray-300 mb-2 hover:text-white transition-colors"
             variants={linkVariants}
@@ -192,7 +192,7 @@ function Footer() {
             aria-label="Navigate to Contact section"
           >
             Contact
-          </a>
+          </motion.a>
         </motion.div>
 
         {/* Contact Info */}
