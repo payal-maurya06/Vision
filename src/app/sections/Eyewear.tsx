@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef } from "react";
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView, useAnimation, easeOut } from 'framer-motion';
 
 function Eyewear() {
   const eyewearItems = [
@@ -74,7 +74,7 @@ function Eyewear() {
     },
   ];
 
-  // Framer Motion Variants (unchanged)
+  // Framer Motion Variants (fixed)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -98,7 +98,7 @@ function Eyewear() {
       filter: 'blur(0px)',
       transition: { 
         duration: 0.6, 
-        ease: [0.22, 1, 0.36, 1] // Professional ease-in-out
+        ease: easeOut
       } 
     },
   };
@@ -115,18 +115,43 @@ function Eyewear() {
       filter: 'blur(0px)',
       transition: { 
         duration: 0.8, 
-        ease: [0.22, 1, 0.36, 1] 
+        ease: easeOut
       } 
     },
   };
 
   const textVariants = {
-    ...itemVariants,
-    transition: { duration: 0.6 },
+    hidden: { 
+      opacity: 0, 
+      y: 30, 
+      filter: 'blur(10px)' 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      filter: 'blur(0px)',
+      transition: { 
+        duration: 0.6, 
+        ease: easeOut
+      } 
+    },
   };
 
   const buttonVariants = {
-    ...itemVariants,
+    hidden: { 
+      opacity: 0, 
+      y: 30, 
+      filter: 'blur(10px)' 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      filter: 'blur(0px)',
+      transition: { 
+        duration: 0.8, 
+        ease: easeOut
+      } 
+    },
     hover: { scale: 1.05 },
     tap: { scale: 0.95 },
   };
@@ -134,15 +159,15 @@ function Eyewear() {
   // Scroll Trigger Refs and Controls
   const headingRef = useRef(null);
   const headingControls = useAnimation();
-  const headingInView = useInView(headingRef, { threshold: 0.3, margin: "-100px 0px" });
+  const headingInView = useInView(headingRef, { margin: "-100px 0px" });
 
   const gridRef = useRef(null);
   const gridControls = useAnimation();
-  const gridInView = useInView(gridRef, { threshold: 0.3, margin: "-100px 0px" });
+  const gridInView = useInView(gridRef, { margin: "-100px 0px" });
 
   const exploreRef = useRef(null);
   const exploreControls = useAnimation();
-  const exploreInView = useInView(exploreRef, { threshold: 0.3, margin: "-100px 0px" });
+  const exploreInView = useInView(exploreRef, { margin: "-100px 0px" });
 
   // Effects to Trigger Animations on Scroll
   useEffect(() => {
@@ -179,12 +204,12 @@ function Eyewear() {
         initial="hidden"
         animate={headingControls}
       >
-        <motion.h3 
+        <motion.p 
           className="text-sm uppercase tracking-widest text-gray-500"
           variants={textVariants}
         >
           PREMIUM COLLECTIONS
-        </motion.h3>
+        </motion.p>
         <motion.h2 
           className="text-4xl font-extrabold text-gray-900 mt-2"
           variants={textVariants}
@@ -229,10 +254,7 @@ function Eyewear() {
             </div>
 
             {/* Info */}
-            <motion.div 
-              className="mt-6"
-              // Removed variants={textVariants} from here
-            >
+            <div className="mt-6">
               <motion.p 
                 className="text-sm text-gray-500"
                 variants={textVariants}
@@ -247,10 +269,7 @@ function Eyewear() {
               </motion.h3>
 
               {/* Price */}
-              <motion.div 
-                className="mt-2"
-                variants={textVariants}
-              >
+              <div className="mt-2">
                 <motion.span 
                   className="text-xl font-semibold text-gray-900"
                   variants={textVariants}
@@ -265,18 +284,18 @@ function Eyewear() {
                     {item.oldPrice}
                   </motion.span>
                 )}
-              </motion.div>
+              </div>
 
               {/* Button */}
               <motion.button 
                 className="mt-4 px-6 py-2 border border-gray-300 text-black font-medium hover:bg-[#f1f4f7] transition"
                 variants={buttonVariants}
-                whileHover="hover"
+                
                 whileTap="tap"
               >
                 Shop {item.name.split(" ")[0]}
               </motion.button>
-            </motion.div>
+            </div>
           </motion.div>
         ))}
       </motion.div>
