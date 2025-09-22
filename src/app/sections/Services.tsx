@@ -30,14 +30,17 @@ function Services() {
     },
   ];
 
-  // Framer Motion variants for animations
+  // Framer Motion variants for animations with proper easing types
   const headerVariants = {
     hidden: { opacity: 0, y: -20, filter: "blur(5px)" },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { 
+        duration: 0.6, 
+        ease: [0.25, 0.46, 0.45, 0.94] as const // easeOutQuad
+      },
     },
   };
 
@@ -49,18 +52,12 @@ function Services() {
       filter: "blur(0px)",
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: [0.25, 0.46, 0.45, 0.94] as const, // easeOutQuad
         delay: i * 0.2, // Staggered entrance
       },
     }),
   };
 
-  const buttonVariants = {
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.2, ease: "easeInOut" },
-    },
-  };
 
   return (
     <div className="relative min-h-screen w-full font-roboto px-6 py-16 text-gray-800 overflow-hidden">
@@ -134,13 +131,13 @@ function Services() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className="overflow-hidden flex flex-col justify-between shadow-md hover:shadow-xl transition-shadow duration-500 group cursor-pointer bg-white"
+              className="overflow-hidden flex flex-col justify-between transition-shadow duration-500 group cursor-pointer bg-white"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={cardVariants}
               custom={index}
-              whileHover={{ scale: 1.02 }} // Subtle hover scale
+              
               transition={{ duration: 0.3 }}
               role="article"
               aria-labelledby={`service-title-${index}`}
@@ -151,7 +148,7 @@ function Services() {
                   src={service.image}
                   alt={`${service.title} - Professional eye care service`}
                   className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy" // SEO: Lazy loading for performance
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                 <motion.h3
@@ -177,8 +174,8 @@ function Services() {
                 </motion.p>
                 <motion.button
                   className="mt-auto px-4 py-2 border border-gray-700 text-gray-700 font-medium hover:bg-[#775647] hover:text-white transition-colors flex items-center gap-2 w-max"
-                  variants={buttonVariants}
-                  whileHover="hover"
+                  
+                  
                   aria-label={`Learn more about ${service.title}`}
                 >
                   {service.buttonText} <span className="text-xl">→</span>
