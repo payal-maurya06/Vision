@@ -14,36 +14,28 @@ function Counting() {
       value: 100000,
       label: "Worldwide Delivery",
       icon: (
-        <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-          <img src="/icons/i_truck.png" alt="Truck icon" />
-        </div>
+        <img src="/icons/i_truck.png" alt="Truck icon" />
       ),
     },
     {
       value: 100000,
       label: "Satisfied Customers",
       icon: (
-        <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-          <img src="/icons/i_smile.png" alt="Smile icon" />
-        </div>
+        <img src="/icons/i_smile.png" alt="Smile icon" />
       ),
     },
     {
       value: 20,
       label: "Excellence Awards",
       icon: (
-        <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-          <img src="/icons/i_trophy.png" alt="Trophy icon" />
-        </div>
+        <img src="/icons/i_trophy.png" alt="Trophy icon" />
       ),
     },
     {
       value: 1000000,
       label: "Perfect Pairs Crafted",
       icon: (
-        <div className="w-12 h-12 mb-4 flex items-center justify-center bg-gray-200 rounded-full">
-          <img src="/icons/i_glass.png" alt="Glasses icon" />
-        </div>
+        <img src="/icons/i_glass.png" alt="Glasses icon" />
       ),
     },
   ];
@@ -73,15 +65,29 @@ function Counting() {
     },
   };
 
+  const iconVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { 
+        type: "spring", 
+        stiffness: 300, 
+        damping: 20,
+        duration: 0.6 
+      },
+    },
+  };
+
   return (
     <motion.div
-      className="py-20 bg-gradient-to-r from-gray-50 to-white font-['Roboto']"
+      className="py-12 md:py-20 bg-gradient-to-r from-gray-50 to-white font-['Roboto']"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 text-center">
         {stats.map((stat, i) => (
           <CounterCard
             key={i}
@@ -89,6 +95,7 @@ function Counting() {
             label={stat.label}
             icon={stat.icon}
             variants={cardVariants}
+            iconVariants={iconVariants}
           />
         ))}
       </div>
@@ -101,9 +108,10 @@ interface CounterCardProps {
   label: string;
   icon: React.ReactNode;
   variants: any;
+  iconVariants: any;
 }
 
-function CounterCard({ value, label, icon, variants }: CounterCardProps) {
+function CounterCard({ value, label, icon, variants, iconVariants }: CounterCardProps) {
   const [count, setCount] = useState(0);
 
   React.useEffect(() => {
@@ -130,14 +138,22 @@ function CounterCard({ value, label, icon, variants }: CounterCardProps) {
 
   return (
     <motion.div
-      className="flex flex-col items-center"
+      className="flex flex-col items-center p-2 md:p-0"
       variants={variants}
     >
-      {icon}
-      <h3 className="text-4xl font-extrabold text-gray-900 mb-2">
+      <motion.div 
+        className="w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4 flex items-center justify-center bg-gray-200 rounded-full"
+        variants={iconVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {icon}
+      </motion.div>
+      <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-1 md:mb-2">
         {formatValue(count)}
       </h3>
-      <p className="text-gray-600 text-lg">{label}</p>
+      <p className="text-gray-600 text-base md:text-lg">{label}</p>
     </motion.div>
   );
 }
