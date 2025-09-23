@@ -60,7 +60,7 @@ function Services() {
 
 
   return (
-    <div className="relative min-h-screen w-full font-roboto px-6 py-16 text-gray-800 overflow-hidden">
+    <div className="relative min-h-screen w-full font-roboto px-4 py-16 text-gray-800 overflow-hidden md:px-6">
       {/* SEO: Structured Data (JSON-LD) - Invisible to users, helps search engines */}
       <script
         type="application/ld+json"
@@ -126,12 +126,12 @@ function Services() {
           </motion.p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        {/* Services Grid - Horizontal scroll for mobile, grid for desktop */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 gap-6 max-w-6xl mx-auto md:grid md:grid-cols-3 md:gap-10 md:overflow-x-hidden md:pb-0">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className="overflow-hidden flex flex-col justify-between transition-shadow duration-500 group cursor-pointer bg-white"
+              className="flex-shrink-0 w-[80vw] max-w-sm snap-center overflow-hidden flex flex-col justify-between transition-shadow duration-500 group cursor-pointer bg-white md:w-auto md:max-w-none"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
@@ -194,6 +194,15 @@ function Services() {
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
           }
+        }
+        /* Custom scrollbar hide for webkit browsers */
+        .overflow-x-auto::-webkit-scrollbar {
+          display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .overflow-x-auto {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
       `}</style>
     </div>
