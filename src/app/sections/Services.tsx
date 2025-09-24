@@ -60,7 +60,7 @@ function Services() {
 
 
   return (
-    <div className="relative min-h-screen w-full font-roboto px-4 py-16 text-gray-800 overflow-hidden md:px-6">
+    <div className="relative min-h-auto w-full font-roboto px-4 py-16 text-gray-800 overflow-hidden md:px-6">
       {/* SEO: Structured Data (JSON-LD) - Invisible to users, helps search engines */}
       <script
         type="application/ld+json"
