@@ -21,9 +21,20 @@ function NavBar() {
     <nav className="font-roboto bg-[#fdfdfd] w-full z-50 shadow-md">
       <div className="h-[100px] flex items-center justify-between px-4 md:px-8 lg:px-16">
         
-        {/* Logo */}
-        <div className="w-30 flex items-center">
-          <img src="/logo/logo_no_bg.png" alt="Logo" className="max-w-full h-auto" />
+        {/* Mobile Hamburger - Moved to left */}
+        <div className="md:hidden cursor-pointer z-50" onClick={() => setIsOpen(!isOpen)}>
+          <div className="w-6 h-0.5 bg-gray-800 mb-1 transition-all duration-300" style={{ transform: isOpen ? 'rotate(45deg) translate(5px, 5px)' : 'rotate(0)' }} />
+          <div className="w-6 h-0.5 bg-gray-800 mb-1 transition-all duration-300" style={{ opacity: isOpen ? 0 : 1 }} />
+          <div className="w-6 h-0.5 bg-gray-800 transition-all duration-300" style={{ transform: isOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'rotate(0)' }} />
+        </div>
+
+        {/* Logo - Centered and resized for mobile */}
+        <div className="absolute left-1/2 lg:ml-[20px] transform -translate-x-1/2 md:static md:transform-none md:w-30 flex items-center">
+          <img 
+            src="/logo/logo_no_bg.png" 
+            alt="Logo" 
+            className="max-w-[120px] h-auto md:max-w-full" 
+          />
         </div>
 
         {/* Desktop Menu */}
@@ -38,7 +49,7 @@ function NavBar() {
           ))}
         </ul>
 
-        {/* Icons */}
+        {/* Icons - Desktop */}
         <div className="hidden md:flex scale-[80%]">
           <ul className="flex gap-4 md:gap-6">
             {/* Search */}
@@ -81,11 +92,27 @@ function NavBar() {
           </ul>
         </div>
 
-        {/* Mobile Hamburger */}
-        <div className="md:hidden cursor-pointer z-50" onClick={() => setIsOpen(!isOpen)}>
-          <div className="w-6 h-0.5 bg-gray-800 mb-1 transition-all duration-300" style={{ transform: isOpen ? 'rotate(45deg) translate(5px, 5px)' : 'rotate(0)' }} />
-          <div className="w-6 h-0.5 bg-gray-800 mb-1 transition-all duration-300" style={{ opacity: isOpen ? 0 : 1 }} />
-          <div className="w-6 h-0.5 bg-gray-800 transition-all duration-300" style={{ transform: isOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'rotate(0)' }} />
+        {/* Mobile Icons - Right side */}
+        <div className="md:hidden flex items-center gap-4">
+          {/* Search Icon */}
+          <div className="cursor-pointer p-2 rounded-full hover:bg-[#e1d9d7] transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+              <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M22 22L20 20" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          
+          {/* Cart Icon */}
+          <div className="cursor-pointer p-2 rounded-full hover:bg-[#e1d9d7] transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+              <g>
+                <path d="M7.5 7.66952V6.69952C7.5 4.44952 9.31 2.23952 11.56 2.02952C14.24 1.76952 16.5 3.87952 16.5 6.50952V7.88952" stroke="#000" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8.99995 22H14.9999C19.0199 22 19.7399 20.39 19.9499 18.43L20.6999 12.43C20.9699 9.99 20.2699 8 15.9999 8H7.99995C3.72995 8 3.02995 9.99 3.29995 12.43L4.04995 18.43C4.25995 20.39 4.97995 22 8.99995 22Z" stroke="#000" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M15.4955 12H15.5045" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8.49451 12H8.50349" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
 
