@@ -97,7 +97,7 @@ function Hero() {
   }, [slides.length]);
 
   return (
-    <div className="relative min-h-screen h-screen w-full bg-gray-900 flex items-center justify-center text-white overflow-hidden">
+    <div className="relative h-[400px] md:h-screen w-full bg-gray-900 flex items-center justify-center text-white overflow-hidden">
       {/* Slide Image */}
       <motion.img
         key={currentSlide}
@@ -122,32 +122,32 @@ function Hero() {
       >
         <motion.h1 
           variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 sm:mb-4 tracking-tight"
         >
           {slides[currentSlide].title}
         </motion.h1>
         <motion.h2 
           variants={itemVariants}
-          className="text-xl sm:text-2xl md:text-3xl font-light mb-6"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-4 sm:mb-6"
         >
           {slides[currentSlide].subtitle}
         </motion.h2>
         <motion.p 
           variants={itemVariants}
-          className="mb-8 text-base sm:text-lg max-w-3xl mx-auto"
+          className="mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg max-w-3xl mx-auto"
         >
           {slides[currentSlide].description}
         </motion.p>
 
         {/* Buttons with left-right animation */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <motion.button 
             variants={leftButtonVariants}
             initial="hidden"
             animate="visible"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-[#775647] hover:bg-[#4b2a1b] font-semibold transition-colors"
+            className="px-6 sm:px-8 py-2 sm:py-3 bg-[#775647] hover:bg-[#4b2a1b] font-semibold transition-colors text-sm sm:text-base"
           >
             SHOP NOW
           </motion.button>
@@ -156,9 +156,9 @@ function Hero() {
             variants={rightButtonVariants}
             initial="hidden"
             animate="visible"
-            
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 border-2 border-white hover:bg-white hover:text-[#775647] font-semibold transition-colors"
+            className="px-6 sm:px-8 py-2 sm:py-3 border-2 border-white hover:bg-white hover:text-[#775647] font-semibold transition-colors text-sm sm:text-base"
           >
             VIEW COLLECTION
           </motion.button>
