@@ -71,10 +71,10 @@ function About() {
 
   return (
     <motion.div
-      className="relative min-h-screen w-full font-roboto text-gray-800 px-6 py-16"
+      className="relative min-h-screen w-full font-roboto text-gray-800 px-4 md:px-6 py-8 md:py-16"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }} // <-- This is the scroll trigger
+      viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants as any}
       role="main"
       aria-labelledby="about-heading"
@@ -88,7 +88,7 @@ function About() {
             "@type": "Organization",
             name: "Shreya Vision Care",
             description: "Optometry-led clinic and optical retail center in Aligarh providing advanced eye care.",
-            url: "https://www.shreyavisioncare.com", // Replace with actual URL
+            url: "https://www.shreyavisioncare.com",
             address: {
               "@type": "PostalAddress",
               addressLocality: "Aligarh",
@@ -100,7 +100,7 @@ function About() {
               name: "Optometrist Ashish Bhatnagar"
             },
             knowsAbout: ["Eye Exams", "Myopia Management", "Eyewear Lenses", "International Eyewear"],
-            openingHours: "Mo-Su 09:00-20:00", // Customize as needed
+            openingHours: "Mo-Su 09:00-20:00",
             priceRange: "$$"
           }),
         }}
@@ -116,32 +116,32 @@ function About() {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-0 items-center">
+      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 items-center">
 
-        {/* Left Side - Image */}
+        {/* Image Section - Order changed for mobile */}
         <motion.div
-          className="relative w-full h-[auto] overflow-hidden"
+          className="relative w-full h-auto overflow-hidden order-1 md:order-1"
           variants={imageVariants as any}
-          whileHover={{ scale: 1.05 }} // Enhanced hover
+          whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.5 }}
         >
           <img
             src="/mockups/m_1.png"
             alt="Shreya Vision Care Eye Clinic in Aligarh - Advanced optometry and eyewear services"
-            className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
-            loading="lazy" // SEO: Lazy loading for performance
+            className="w-full h-auto max-h-80 md:max-h-none object-cover transform transition-transform duration-500 hover:scale-105 rounded-lg md:rounded-none"
+            loading="lazy"
           />
         </motion.div>
 
-        {/* Right Side - Text */}
+        {/* Text Section - Order changed for mobile */}
         <motion.div
-          className="flex flex-col justify-center bg-gray-50 p-10 h-full"
+          className="flex flex-col justify-center bg-gray-50 p-6 md:p-10 h-full order-2 md:order-2"
           variants={staggerContainer as any}
           aria-labelledby="about-heading"
         >
           {/* Badge */}
           <motion.span
-            className="inline-block bg-[#775647]/10 text-[#775647] px-4 py-1 text-sm font-medium tracking-wide mb-4 w-max"
+            className="inline-block bg-[#775647]/10 text-[#775647] px-3 md:px-4 py-1 text-xs md:text-sm font-medium tracking-wide mb-3 md:mb-4 w-max"
             variants={badgeVariants as any}
             lang="en"
           >
@@ -150,14 +150,14 @@ function About() {
 
           <motion.h2
             id="about-heading"
-            className="text-4xl font-bold mb-6 text-gray-900"
+            className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-gray-900"
             variants={textVariants as any}
           >
             About Shreya Vision Care
           </motion.h2>
 
           <motion.p
-            className="text-base text-gray-700 mb-4 leading-relaxed"
+            className="text-sm md:text-base text-gray-700 mb-3 md:mb-4 leading-relaxed"
             variants={textVariants as any}
           >
             <span className="font-semibold">Shreya Vision Care</span> is an
@@ -169,7 +169,7 @@ function About() {
           </motion.p>
 
           <motion.ul
-            className="list-disc list-inside text-gray-700 space-y-1 mb-4 text-base"
+            className="list-disc list-inside text-gray-700 space-y-1 mb-3 md:mb-4 text-sm md:text-base"
             variants={staggerContainer as any}
           >
             {[
@@ -190,7 +190,7 @@ function About() {
           </motion.ul>
 
           <motion.p
-            className="text-base text-gray-700 leading-relaxed mb-6"
+            className="text-sm md:text-base text-gray-700 leading-relaxed mb-4 md:mb-6"
             variants={textVariants as any}
           >
             Our focus is on accurate prescriptions, advanced protection, and
@@ -198,7 +198,7 @@ function About() {
           </motion.p>
 
           <motion.h3
-            className="text-lg font-semibold text-[#775647] mb-6"
+            className="text-base md:text-lg font-semibold text-[#775647] mb-4 md:mb-6"
             variants={textVariants as any}
           >
             Shreya Vision Care – Where Optometry Meets Excellence.
@@ -206,7 +206,7 @@ function About() {
 
           {/* Read More Button */}
           <motion.button
-            className="px-6 py-2 border border-gray-700 text-gray-700 font-medium hover:bg-[#775647] hover:text-white transition-colors w-max"
+            className="px-4 md:px-6 py-2 border border-gray-700 text-gray-700 font-medium text-sm md:text-base hover:bg-[#775647] hover:text-white transition-colors w-full md:w-max"
             variants={buttonVariants as any}
             whileHover="hover"
             aria-label="Read more about Shreya Vision Care"
@@ -216,7 +216,7 @@ function About() {
         </motion.div>
       </div>
 
-      {/* Respect reduced motion for accessibility */}
+      {/* Reduced motion accessibility */}
       <style jsx>{`
         @media (prefers-reduced-motion: reduce) {
           * {
