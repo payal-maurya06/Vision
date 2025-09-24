@@ -45,7 +45,7 @@ function Visit() {
 
   return (
     <motion.div
-      className="relative w-full h-screen font-roboto text-gray-800 overflow-hidden"
+      className="relative w-full h-[60vh] md:h-screen font-roboto text-gray-800 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
@@ -65,20 +65,20 @@ function Visit() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative h-full flex items-center justify-center px-6">
+      <div className="relative h-full flex items-center justify-center px-4 md:px-6">
         <motion.div className="max-w-4xl text-center text-white">
-          <motion.h2 id="visit-heading" className="text-4xl font-bold mb-4" variants={textVariants}>
+          <motion.h2 id="visit-heading" className="text-2xl md:text-4xl font-bold mb-3 md:mb-4" variants={textVariants}>
             Experience Excellence
           </motion.h2>
 
-          <motion.p className="text-lg mb-10 leading-relaxed" variants={textVariants}>
+          <motion.p className="text-sm md:text-lg mb-6 md:mb-10 leading-relaxed max-w-md md:max-w-none mx-auto" variants={textVariants}>
             Step into our world of optical perfection where cutting-edge
             technology meets timeless craftsmanship.
           </motion.p>
 
-          <div className="flex justify-center gap-6">
+          <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-6 w-full max-w-xs md:max-w-none mx-auto">
             <motion.button
-              className="px-6 py-3 bg-[#775647] text-white font-medium shadow-md hover:bg-[#5a3e33] transition-colors"
+              className="px-4 md:px-6 py-2 md:py-3 bg-[#775647] text-white font-medium text-sm md:text-base shadow-md hover:bg-[#5a3e33] transition-colors w-full"
               variants={buttonLeftVariants}
               initial="hidden"
               animate="visible"
@@ -89,7 +89,7 @@ function Visit() {
             </motion.button>
 
             <motion.button
-              className="px-6 py-3 border border-white text-white font-medium hover:bg-white hover:text-[#775647] transition-colors"
+              className="px-4 md:px-6 py-2 md:py-3 border border-white text-white font-medium text-sm md:text-base hover:bg-white hover:text-[#775647] transition-colors w-full"
               variants={buttonRightVariants}
               initial="hidden"
               animate="visible"
