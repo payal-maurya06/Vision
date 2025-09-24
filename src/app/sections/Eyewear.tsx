@@ -86,22 +86,22 @@ function Eyewear() {
     },
   };
 
-  const headingVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20, 
-      filter: 'blur(10px)' 
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      filter: 'blur(0px)',
-      transition: { 
-        duration: 0.6, 
-        ease: easeOut
-      } 
-    },
-  };
+  // const headingVariants = {
+  //   hidden: { 
+  //     opacity: 0, 
+  //     y: 20, 
+  //     filter: 'blur(10px)' 
+  //   },
+  //   visible: { 
+  //     opacity: 1, 
+  //     y: 0, 
+  //     filter: 'blur(0px)',
+  //     transition: { 
+  //       duration: 0.6, 
+  //       ease: easeOut
+  //     } 
+  //   },
+  // };
 
   const itemVariants = {
     hidden: { 
@@ -182,7 +182,7 @@ function Eyewear() {
           className="text-gray-600 mt-4 text-lg"
           variants={textVariants}
         >
-          Handpicked selections from the world's most prestigious brands,
+          Handpicked selections from the world&pos;s most prestigious brands,
           curated for the discerning eye
         </motion.p>
       </motion.div>

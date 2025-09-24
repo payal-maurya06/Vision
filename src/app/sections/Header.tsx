@@ -1,3 +1,4 @@
+// ./src/app/sections/Header.tsx
 'use client'
 import { motion } from 'framer-motion';
 
@@ -20,7 +21,7 @@ function Header() {
           |
         </h1>
         <h1 className="text-white text-xs sm:text-[14px] font-medium px-4 sm:px-8 inline-block">
-          15% OFF SITEWIDE! USE CODE - 'FLAT15'
+          15% OFF SITEWIDE! USE CODE - &apos;FLAT15&apos;
         </h1>
         <h1 className="text-white text-xs sm:text-[14px] font-medium px-4 sm:px-8 inline-block">
           |
@@ -32,7 +33,7 @@ function Header() {
           |
         </h1>
         <h1 className="text-white text-xs sm:text-[14px] font-medium px-4 sm:px-8 inline-block">
-          15% OFF SITEWIDE! USE CODE - 'FLAT15'
+          15% OFF SITEWIDE! USE CODE - &apos;FLAT15&apos;
         </h1>
         <h1 className="text-white text-xs sm:text-[14px] font-medium px-4 sm:px-8 inline-block">
           |
@@ -44,7 +45,7 @@ function Header() {
           |
         </h1>
         <h1 className="text-white text-xs sm:text-[14px] font-medium px-4 sm:px-8 inline-block">
-          15% OFF SITEWIDE! USE CODE - 'FLAT15'
+          15% OFF SITEWIDE! USE CODE - &apos;FLAT15&apos;
         </h1>
       </motion.div>
     </div>

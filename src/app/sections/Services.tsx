@@ -1,6 +1,8 @@
+// ./src/app/sections/Services.tsx
 'use client'
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image"; // Import Image component
 
 function Services() {
   const services = [
@@ -10,7 +12,7 @@ function Services() {
         "Premium prescription eyewear with unmatched expertise. Choose from top global brands like Gucci, Prada, Burberry, paired with best-in-class lenses.",
       buttonText: "Explore More",
       image:
-        "https://gmsunglasses.com/wp-content/uploads/2021/05/Hero_Article_EnUK_FAQ-Reading-Glasses-Power.jpg",
+        "/services/s_1.png",
     },
     {
       title: "Comprehensive Eye Exam",
@@ -18,7 +20,7 @@ function Services() {
         "State-of-the-art Visioffice® technology ensures perfect vision. Advanced system crafts lenses tailored to your unique needs.",
       buttonText: "Book Now",
       image:
-        "https://cdn.prod.website-files.com/5ff8126e9f80b718dc63f907/651ade6e0c9e1fd2266cd229_do-s-and-don-ts-before-eye-exam-how-to-prepare-for-an-eye-exam.webp",
+        "/services/s_2.png",
     },
     {
       title: "Contact Lenses",
@@ -26,7 +28,7 @@ function Services() {
         "Personalized consultations for perfect fit. Choose from Acuvue, Bausch + Lomb, Alcon, CooperVision, and more top brands.",
       buttonText: "Shop Now",
       image:
-        "https://my.clevelandclinic.org/-/scassets/images/org/health/articles/10737-contacts",
+        "/services/s_3.png",
     },
   ];
 
@@ -144,10 +146,12 @@ function Services() {
             >
               {/* Image with gradient overlay and title */}
               <div className="relative h-56 overflow-hidden">
-                <img
+                <Image // Used Next.js Image component
                   src={service.image}
                   alt={`${service.title} - Professional eye care service`}
-                  className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                  layout="fill" // Use fill to cover the parent div
+                  objectFit="cover" // Maintain aspect ratio and cover area
+                  className="transform transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>

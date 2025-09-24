@@ -1,6 +1,8 @@
+// ./src/app/sections/Footer.tsx
 'use client'
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image"; // Import Image component
 
 function Footer() {
   // Framer Motion variants for animations
@@ -140,13 +142,16 @@ function Footer() {
       >
         {/* Logo & About */}
         <motion.div className="flex flex-col" variants={columnVariants} custom={0}>
-          <motion.img
-            src="/logo/logo.png" // Replace with actual logo URL
-            alt="Shreya Vision Care Logo - Optometry clinic in Aligarh"
-            className="w-32 mb-4"
-            variants={logoVariants}
-            loading="lazy" // SEO: Lazy loading for performance
-          />
+          <motion.div variants={logoVariants}>
+            <Image // Used Next.js Image component
+              src="/logo/logo.png" // Replace with actual logo URL
+              alt="Shreya Vision Care Logo - Optometry clinic in Aligarh"
+              width={128} // Equivalent to w-32 (32 * 4 = 128px)
+              height={40} // Adjust height as needed
+              className="w-32 mb-4"
+              loading="lazy" // SEO: Lazy loading for performance
+            />
+          </motion.div>
           <motion.p className="text-gray-300 text-sm" variants={textVariants}>
             Shreya Vision Care is an optometry-led eye clinic and optical retail center in Aligarh, providing advanced eye care with modern technology and expert clinical knowledge.
           </motion.p>
@@ -228,9 +233,11 @@ function Footer() {
               aria-label="Follow Shreya Vision Care on Facebook"
               target="_blank"
             >
-              <img
+              <Image // Used Next.js Image component
                 src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
                 alt="Facebook logo - Follow Shreya Vision Care on Facebook"
+                width={24} // Equivalent to w-6
+                height={24} // Equivalent to h-6
                 className="w-6 h-6"
                 loading="lazy"
               />
@@ -246,9 +253,11 @@ function Footer() {
               aria-label="Follow Shreya Vision Care on Instagram"
               target="_blank"
             >
-              <img
+              <Image // Used Next.js Image component
                 src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
                 alt="Instagram logo - Follow Shreya Vision Care on Instagram"
+                width={24} // Equivalent to w-6
+                height={24} // Equivalent to h-6
                 className="w-6 h-6"
                 loading="lazy"
               />
@@ -264,9 +273,11 @@ function Footer() {
               aria-label="Follow Shreya Vision Care on Twitter"
               target="_blank"
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/1024px-Logo_of_Twitter.svg.png"
+              <Image // Used Next.js Image component
+                src="/footer/twitter.png"
                 alt="Twitter logo - Follow Shreya Vision Care on Twitter"
+                width={24} // Equivalent to w-6
+                height={24} // Equivalent to h-6
                 className="w-6 h-6"
                 loading="lazy"
               />
@@ -282,9 +293,11 @@ function Footer() {
               aria-label="Follow Shreya Vision Care on LinkedIn"
               target="_blank"
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+              <Image // Used Next.js Image component
+                src="/footer/linkedin.png"
                 alt="LinkedIn logo - Follow Shreya Vision Care on LinkedIn"
+                width={24} // Equivalent to w-6
+                height={24} // Equivalent to h-6
                 className="w-6 h-6"
                 loading="lazy"
               />

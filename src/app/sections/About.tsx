@@ -1,10 +1,11 @@
 'use client'
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import Image from "next/image";
 
 function About() {
   // Framer Motion variants for animations
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, filter: "blur(5px)" },
     visible: {
       opacity: 1,
@@ -13,7 +14,7 @@ function About() {
     },
   };
 
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95, filter: "blur(6px)" },
     visible: {
       opacity: 1,
@@ -23,7 +24,7 @@ function About() {
     },
   };
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
     visible: {
       opacity: 1,
@@ -33,7 +34,7 @@ function About() {
     },
   };
 
-  const staggerContainer = {
+  const staggerContainer: Variants = {
     visible: {
       transition: {
         staggerChildren: 0.15,
@@ -42,7 +43,7 @@ function About() {
     },
   };
 
-  const badgeVariants = {
+  const badgeVariants: Variants = {
     hidden: { opacity: 0, x: -20, filter: "blur(3px)" },
     visible: {
       opacity: 1,
@@ -52,7 +53,7 @@ function About() {
     },
   };
 
-  const listItemVariants = {
+  const listItemVariants: Variants = {
     hidden: { opacity: 0, x: -10, filter: "blur(3px)" },
     visible: (i: number) => ({
       opacity: 1,
@@ -62,7 +63,7 @@ function About() {
     }),
   };
 
-  const buttonVariants = {
+  const buttonVariants: Variants = {
     hover: {
       scale: 1.05,
       transition: { duration: 0.2, ease: "easeInOut" },
@@ -75,7 +76,7 @@ function About() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      variants={containerVariants as any}
+      variants={containerVariants}
       role="main"
       aria-labelledby="about-heading"
     >
@@ -121,13 +122,15 @@ function About() {
         {/* Image Section - Order changed for mobile */}
         <motion.div
           className="relative w-full h-auto overflow-hidden order-1 md:order-1"
-          variants={imageVariants as any}
+          variants={imageVariants}
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.5 }}
         >
-          <img
+          <Image
             src="/mockups/m_1.png"
             alt="Shreya Vision Care Eye Clinic in Aligarh - Advanced optometry and eyewear services"
+            width={800}
+            height={500}
             className="w-full h-auto max-h-80 md:max-h-none object-cover transform transition-transform duration-500 hover:scale-105 rounded-lg md:rounded-none"
             loading="lazy"
           />
@@ -136,13 +139,13 @@ function About() {
         {/* Text Section - Order changed for mobile */}
         <motion.div
           className="flex flex-col justify-center bg-gray-50 p-6 md:p-10 h-full order-2 md:order-2"
-          variants={staggerContainer as any}
+          variants={staggerContainer}
           aria-labelledby="about-heading"
         >
           {/* Badge */}
           <motion.span
             className="inline-block bg-[#775647]/10 text-[#775647] px-3 md:px-4 py-1 text-xs md:text-sm font-medium tracking-wide mb-3 md:mb-4 w-max"
-            variants={badgeVariants as any}
+            variants={badgeVariants}
             lang="en"
           >
             Trusted Eye Care in Aligarh
@@ -151,14 +154,14 @@ function About() {
           <motion.h2
             id="about-heading"
             className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-gray-900"
-            variants={textVariants as any}
+            variants={textVariants}
           >
             About Shreya Vision Care
           </motion.h2>
 
           <motion.p
             className="text-sm md:text-base text-gray-700 mb-3 md:mb-4 leading-relaxed"
-            variants={textVariants as any}
+            variants={textVariants}
           >
             <span className="font-semibold">Shreya Vision Care</span> is an
             optometry-led clinic and optical retail center in{" "}
@@ -170,7 +173,7 @@ function About() {
 
           <motion.ul
             className="list-disc list-inside text-gray-700 space-y-1 mb-3 md:mb-4 text-sm md:text-base"
-            variants={staggerContainer as any}
+            variants={staggerContainer}
           >
             {[
               "Eye exams for all age groups",
@@ -181,7 +184,7 @@ function About() {
               <motion.li
                 key={i}
                 className="leading-relaxed"
-                variants={listItemVariants as any}
+                variants={listItemVariants}
                 custom={i}
               >
                 {item}
@@ -191,7 +194,7 @@ function About() {
 
           <motion.p
             className="text-sm md:text-base text-gray-700 leading-relaxed mb-4 md:mb-6"
-            variants={textVariants as any}
+            variants={textVariants}
           >
             Our focus is on accurate prescriptions, advanced protection, and
             clear, comfortable vision for every patient.
@@ -199,7 +202,7 @@ function About() {
 
           <motion.h3
             className="text-base md:text-lg font-semibold text-[#775647] mb-4 md:mb-6"
-            variants={textVariants as any}
+            variants={textVariants}
           >
             Shreya Vision Care – Where Optometry Meets Excellence.
           </motion.h3>
@@ -207,7 +210,7 @@ function About() {
           {/* Read More Button */}
           <motion.button
             className="px-4 md:px-6 py-2 border border-gray-700 text-gray-700 font-medium text-sm md:text-base hover:bg-[#775647] hover:text-white transition-colors w-full md:w-max"
-            variants={buttonVariants as any}
+            variants={buttonVariants}
             whileHover="hover"
             aria-label="Read more about Shreya Vision Care"
           >

@@ -1,7 +1,9 @@
 import "./globals.css";
 import About from "./sections/About";
 import Brand from "./sections/Brand";
-import Category from "./sections/Category";
+// import Category from "./sections/Category";
+// import Category2 from "./sections/Category2BB";
+import Category3 from "./sections/Category3DD";
 import Counting from "./sections/Counting";
 import Eyewear from "./sections/Eyewear";
 import Footer from "./sections/Footer";
@@ -23,7 +25,8 @@ export default function RootLayout({
         <Header/>
         <NavBar/>
         <Hero/>
-        <Category/>
+        
+        <Category3/>
         <Eyewear/>
         <Brand/>
         <Services/>

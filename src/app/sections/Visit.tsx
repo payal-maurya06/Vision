@@ -1,6 +1,8 @@
+// ./src/app/sections/Visit.tsx
 'use client'
 import React from "react";
 import { motion, easeOut } from "framer-motion";
+import Image from "next/image"; // Import Image component
 
 function Visit() {
   const containerVariants = {
@@ -55,10 +57,11 @@ function Visit() {
     >
       {/* Background Image */}
       <motion.div className="absolute inset-0" variants={imageVariants}>
-        <img
-          src="https://seeeyewear.com/cdn/shop/files/Web_Loyalty_Desktop_1800x800_85c32007-2c36-4fef-b6e5-d9500d8bc700_1000x.webp?v=1664526952"
+        <Image // Used Next.js Image component
+          src="/hero/visit.png"
           alt="See Eyewear optical store interior"
-          className="w-full h-full object-cover"
+          layout="fill" // Use fill to cover the parent div
+          objectFit="cover" // Maintain aspect ratio and cover area
           loading="lazy"
         />
         <div className="absolute inset-0 bg-black/50" />

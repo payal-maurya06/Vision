@@ -1,6 +1,8 @@
+// ./src/app/sections/Testimonial.tsx
 'use client'
 import React from "react";
 import { motion } from "framer-motion"; // Import motion
+import Image from "next/image"; // Import Image component
 
 function Testimonial() {
   const testimonials = [
@@ -9,7 +11,7 @@ function Testimonial() {
         "Advani Opticals has been my go-to for luxury eyewear for over 5 years. Their collection is unmatched and the service is exceptional.",
       name: "Priya Sharma",
       role: "Fashion Designer",
-      avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+      avatar: "/testimonial/t_1.png",
       stars: 5,
     },
     {
@@ -17,7 +19,7 @@ function Testimonial() {
         "The eye examination was thorough and professional. They helped me find the perfect frames that suit both my style and vision needs.",
       name: "Rajesh Kumar",
       role: "Business Executive",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      avatar: "/testimonial/t_2.png",
       stars: 5,
     },
     {
@@ -25,7 +27,7 @@ function Testimonial() {
         "Outstanding quality and service! The Visioffice technology ensured my progressive lenses were perfectly customized. Highly recommend!",
       name: "Anita Desai",
       role: "Architect",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+      avatar: "/testimonial/t_3.png",
       stars: 5,
     },
     {
@@ -33,7 +35,7 @@ function Testimonial() {
         "Exceptional eyewear and personalized service. They truly care about their clients and their vision.",
       name: "Sneha Kapoor",
       role: "Stylist",
-      avatar: "https://randomuser.me/api/portraits/women/52.jpg",
+      avatar: "/testimonial/t_4.png",
       stars: 5,
     },
     {
@@ -41,7 +43,7 @@ function Testimonial() {
         "Highly professional and reliable. Found the perfect lenses that fit my lifestyle and fashion sense.",
       name: "Vikram Singh",
       role: "Entrepreneur",
-      avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+      avatar: "/testimonial/t_5.png",
       stars: 5,
     },
     {
@@ -49,7 +51,7 @@ function Testimonial() {
         "A fantastic experience! The team guided me to choose frames that complement my face and personality.",
       name: "Neha Gupta",
       role: "Marketing Specialist",
-      avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+      avatar: "/testimonial/t_6.png",
       stars: 5,
     },
   ];
@@ -154,9 +156,11 @@ function Testimonial() {
             >
               {/* Avatar + Name */}
               <div className="flex items-center mb-3 md:mb-4">
-                <img
+                <Image // Used Next.js Image component
                   src={t.avatar}
                   alt={t.name}
+                  width={48} // Equivalent to w-12
+                  height={48} // Equivalent to h-12
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full mr-2 md:mr-3 object-cover border-2 border-gray-500"
                 />
                 <div>
@@ -187,9 +191,11 @@ function Testimonial() {
             >
               {/* Avatar + Name */}
               <div className="flex items-center mb-3 md:mb-4">
-                <img
+                <Image // Used Next.js Image component
                   src={t.avatar}
                   alt={t.name}
+                  width={48} // Equivalent to w-12
+                  height={48} // Equivalent to h-12
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full mr-2 md:mr-3 object-cover border-2 border-gray-500"
                 />
                 <div>

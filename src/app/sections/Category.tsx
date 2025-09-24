@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 function Category() {
   // Framer Motion Variants
@@ -98,7 +99,7 @@ function Category() {
               className="flex flex-col items-center text-center"
               variants={itemVariants}
             >
-              <img
+              <Image
                 src="https://media.glamour.com/photos/66632fd8a10b3df87c4fcd39/2:3/w_2307,h_3460,c_limit/1980402531"
                 alt="Sunglasses"
                 className="w-48 h-48 rounded-full object-cover shadow-md"
@@ -128,7 +129,7 @@ function Category() {
               className="flex flex-col items-center text-center"
               variants={itemVariants}
             >
-              <img
+              <Image
                 src="https://assets2.glassesdirect.com/cdn-record-files/dressedon/ad4d8938-1bba-4569-9395-b28700c1e0c1/0RX6541__2501__SHOOT__om4.png?impolicy=GD_Resize_New&q=85&im=Resize%2Cwidth%3D500%2Cheight%3D600%2Caspect%3Dfill%3BUnsharpMask%2Csigma%3D1.0%2Cgain%3D1.0"
                 alt="Prescription Glasses"
                 className="w-48 h-48 md:w-80 md:h-80 rounded-full object-cover shadow-md"
@@ -158,7 +159,7 @@ function Category() {
               className="flex flex-col items-center text-center"
               variants={itemVariants}
             >
-              <img
+              <Image
                 src="https://media.opsm.com/s7/contact-lenses_tips-750x600.jpg"
                 alt="Contact Lenses"
                 className="w-48 h-48 rounded-full object-cover shadow-md"

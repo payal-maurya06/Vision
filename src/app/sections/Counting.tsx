@@ -1,6 +1,8 @@
+// ./src/app/sections/Counting.tsx
 'use client'
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion"; // Import Variants type
+import Image from "next/image"; // Import Image component
 
 interface StatItem {
   value: number;
@@ -14,34 +16,34 @@ function Counting() {
       value: 100000,
       label: "Worldwide Delivery",
       icon: (
-        <img src="/icons/i_truck.png" alt="Truck icon" />
+        <Image src="/icons/i_truck.png" alt="Truck icon" width={48} height={48} /> // Used Next.js Image component
       ),
     },
     {
       value: 100000,
       label: "Satisfied Customers",
       icon: (
-        <img src="/icons/i_smile.png" alt="Smile icon" />
+        <Image src="/icons/i_smile.png" alt="Smile icon" width={48} height={48} /> // Used Next.js Image component
       ),
     },
     {
       value: 20,
       label: "Excellence Awards",
       icon: (
-        <img src="/icons/i_trophy.png" alt="Trophy icon" />
+        <Image src="/icons/i_trophy.png" alt="Trophy icon" width={48} height={48} /> // Used Next.js Image component
       ),
     },
     {
       value: 1000000,
       label: "Perfect Pairs Crafted",
       icon: (
-        <img src="/icons/i_glass.png" alt="Glasses icon" />
+        <Image src="/icons/i_glass.png" alt="Glasses icon" width={48} height={48} /> // Used Next.js Image component
       ),
     },
   ];
 
   // Framer Motion variants for container and cards
-  const containerVariants = {
+  const containerVariants: Variants = { // Explicitly type Variants
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
       opacity: 1,
@@ -55,7 +57,7 @@ function Counting() {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = { // Explicitly type Variants
     hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
     visible: {
       opacity: 1,
@@ -65,7 +67,7 @@ function Counting() {
     },
   };
 
-  const iconVariants = {
+  const iconVariants: Variants = { // Explicitly type Variants
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
@@ -107,8 +109,8 @@ interface CounterCardProps {
   value: number;
   label: string;
   icon: React.ReactNode;
-  variants: any;
-  iconVariants: any;
+  variants: Variants; // Explicitly type Variants
+  iconVariants: Variants; // Explicitly type Variants
 }
 
 function CounterCard({ value, label, icon, variants, iconVariants }: CounterCardProps) {

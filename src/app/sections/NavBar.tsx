@@ -1,6 +1,8 @@
+// ./src/app/sections/NavBar.tsx
 'use client'
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image"; // Import Image component
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +32,11 @@ function NavBar() {
 
         {/* Logo - Centered and resized for mobile */}
         <div className="absolute left-1/2 lg:ml-[20px] transform -translate-x-1/2 md:static md:transform-none md:w-30 flex items-center">
-          <img 
+          <Image // Used Next.js Image component
             src="/logo/logo_no_bg.png" 
             alt="Logo" 
+            width={120} // Specify appropriate width
+            height={40} // Specify appropriate height
             className="max-w-[120px] h-auto md:max-w-full" 
           />
         </div>
