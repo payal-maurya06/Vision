@@ -1,6 +1,7 @@
 import "./globals.css";
 import About from "./sections/About";
 import Brand from "./sections/Brand";
+import Category2 from "./sections/Category2BB";
 // import Category from "./sections/Category";
 // import Category2 from "./sections/Category2BB";
 import Category3 from "./sections/Category3DD";
@@ -26,7 +27,7 @@ export default function RootLayout({
         <NavBar/>
         <Hero/>
         
-        <Category3/>
+        <Category2/>
         <Eyewear/>
         <Brand/>
         <Services/>

@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 interface CategoryItem {
   id: string;
@@ -43,10 +42,13 @@ function Category2() {
 
   // State for rotation (current starting index for cycling)
   const [displayOrder, setDisplayOrder] = useState<CategoryItem[]>(categories);
-  // const totalCategories = categories.length;
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const totalCategories = categories.length;
 
   // Auto-rotation: Cycle order every 3 seconds
   useEffect(() => {
+    if (!isAutoRotating) return;
+
     const interval = setInterval(() => {
       setDisplayOrder((prev) => {
         // Rotate left: move first to end
@@ -55,12 +57,29 @@ function Category2() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isAutoRotating]);
 
   // Helper to check if this is the center position
   const isCenter = (index: number) => index === 1; // Middle in displayOrder (0-left, 1-center, 2-right)
 
-  // Framer Motion Variants (original preserved)
+  // Manual navigation function
+  const navigateToCategory = (categoryId: string) => {
+    setIsAutoRotating(false);
+    
+    // Find current index and rotate to make this category center
+    const currentIndex = categories.findIndex(c => c.id === categoryId);
+    const rotationsNeeded = (currentIndex - 1 + totalCategories) % totalCategories;
+    let newOrder = [...categories];
+    for (let i = 0; i < rotationsNeeded; i++) {
+      newOrder = [...newOrder.slice(1), newOrder[0]];
+    }
+    setDisplayOrder(newOrder);
+    
+    // Resume auto-rotation after 5 seconds
+    setTimeout(() => setIsAutoRotating(true), 5000);
+  };
+
+  // Framer Motion Variants (from Category3DD.tsx)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -112,12 +131,35 @@ function Category2() {
     tap: { scale: 0.95 },
   };
 
+  // Mobile specific variants (from category_updated.tsx)
+  const mobileItemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      scale: 0.95,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1] as const
+      }
+    },
+  };
+
+  const mobileButtonVariants = {
+    hover: { scale: 1.05 },
+    tap: { scale: 0.95 },
+  };
+
   return (
     <div className="font-['Roboto'] relative overflow-x-hidden">
-      <div className="min-h-screen w-full py-12 px-4 sm:px-6 bg-white relative">
+      <div className="min-h-auto w-full py-8 md:py-12 px-4 md:px-6 bg-white relative">
         {/* Diagonal Stripes Background */}
         <div
-          className="absolute inset-0 "
+          className="absolute inset-0"
           style={{
             backgroundImage:
               "repeating-linear-gradient(45deg, transparent, transparent 2px, #f3f4f6 2px, #f3f4f6 4px)",
@@ -134,31 +176,31 @@ function Category2() {
         >
           {/* Heading */}
           <motion.div
-            className="text-center mb-10"
+            className="text-center mb-6 md:mb-10"
             variants={headingVariants}
           >
-            <motion.h2 className="text-3xl font-bold text-gray-800">
+            <motion.h2 className="text-2xl md:text-3xl font-bold text-gray-800">
               Shop by Category
             </motion.h2>
-            <motion.p className="text-lg text-gray-600 mt-2">
+            <motion.p className="text-base md:text-lg text-gray-600 mt-2">
               Our Collections
             </motion.p>
           </motion.div>
 
-          {/* Grid Layout - Unchanged, but center card content sized larger */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Desktop Layout - Using animations from Category3DD.tsx */}
+          <div className="hidden md:grid grid-cols-3 gap-8 max-w-6xl mx-auto">
             {displayOrder.map((category, index) => {
               const centerStyles = isCenter(index) 
                 ? {
-                    imgClass: "w-64 h-64 rounded-full object-cover shadow-lg mx-auto", // Bigger image + shadow
-                    titleClass: "text-2xl font-semibold mt-6", // Larger title, more margin
-                    subtitleClass: "text-base text-gray-600 mt-2", // Slightly larger
-                    descClass: "text-base text-gray-500 mt-2", // Adjusted for balance
-                    buttonClass: "mt-6 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition", // Wider button
-                    extraClass: "py-4" // Extra padding for taller card feel
+                    imgClass: "w-64 h-64 rounded-full object-cover shadow-lg mx-auto",
+                    titleClass: "text-2xl font-semibold mt-6",
+                    subtitleClass: "text-base text-gray-600 mt-2",
+                    descClass: "text-base text-gray-500 mt-2",
+                    buttonClass: "mt-6 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition",
+                    extraClass: "py-4"
                   }
                 : {
-                    imgClass: "w-48 h-48 rounded-full object-cover shadow-md mx-auto", // Original side size
+                    imgClass: "w-48 h-48 rounded-full object-cover shadow-md mx-auto",
                     titleClass: "text-xl font-semibold mt-4",
                     subtitleClass: "text-gray-600 mt-1",
                     descClass: "text-sm text-gray-500 mt-1",
@@ -170,7 +212,7 @@ function Category2() {
                 <motion.div
                   key={category.id}
                   layoutId={category.id}
-                  className={`flex flex-col items-center text-center ${centerStyles.extraClass}`} // Original + extra padding if center
+                  className={`flex flex-col items-center text-center ${centerStyles.extraClass}`}
                   variants={itemVariants}
                   initial="hidden"
                   animate="visible"
@@ -181,11 +223,13 @@ function Category2() {
                       ease: [0.22, 1, 0.36, 1] as const
                     }
                   }}
+                  onClick={() => navigateToCategory(category.id)}
+                  style={{ cursor: 'pointer' }}
                 >
-                  <Image
+                  <img
                     src={category.src}
                     alt={category.alt}
-                    className={centerStyles.imgClass} // Conditional size
+                    className={centerStyles.imgClass}
                     loading="lazy"
                   />
                   <motion.h3 className={centerStyles.titleClass} variants={itemVariants}>
@@ -198,7 +242,7 @@ function Category2() {
                     {category.description}
                   </motion.p>
                   <motion.button
-                    className={centerStyles.buttonClass} // Conditional size
+                    className={centerStyles.buttonClass}
                     variants={buttonVariants}
                     whileHover="hover"
                     whileTap="tap"
@@ -210,29 +254,105 @@ function Category2() {
             })}
           </div>
 
-          {/* Optional Navigation Dots - Below grid, unchanged positioning (commented) */}
-          {/* 
-          <div className="flex justify-center mt-8 space-x-2 col-span-full">
-            {categories.map((category, index) => (
-              <button
-                key={category.id}
-                onClick={() => {
-                  // Rotate to make this the center (index 1)
-                  const targetIndex = categories.findIndex(c => c.id === category.id);
-                  let newOrder = [...categories];
-                  const rotationsNeeded = (targetIndex - 1 + totalCategories) % totalCategories;
-                  for (let i = 0; i < rotationsNeeded; i++) {
-                    newOrder = [...newOrder.slice(1), newOrder[0]];
-                  }
-                  setDisplayOrder(newOrder);
-                }}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  displayOrder[1]?.id === category.id ? 'bg-black' : 'bg-gray-300'
-                }`}
-              />
-            ))}
+          {/* Mobile Layout - Using animations from category_updated.tsx */}
+          <div className="md:hidden">
+            <div className="relative h-[420px] mb-8">
+              {/* Carousel Container */}
+              <div className="relative h-full">
+                {displayOrder.map((category, index) => (
+                  <motion.div
+                    key={`mobile-${category.id}-${index}`}
+                    className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ${
+                      isCenter(index) 
+                        ? 'z-20 opacity-100 scale-100' 
+                        : 'z-10 opacity-0 scale-90 pointer-events-none'
+                    }`}
+                    initial="hidden"
+                    animate="visible"
+                    variants={mobileItemVariants}
+                  >
+                    {/* Card Container */}
+                    <div className="w-full max-w-xs bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                      {/* Image Container */}
+                      <div className="flex justify-center mb-4">
+                        <img
+                          src={category.src}
+                          alt={category.alt}
+                          className="w-32 h-32 object-cover rounded-full shadow-md"
+                          loading="lazy"
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-gray-800 mb-1">{category.title}</h3>
+                        <p className="text-sm text-gray-600 mb-2 font-medium">{category.subtitle}</p>
+                        <p className="text-xs text-gray-500 leading-relaxed mb-4 px-2">
+                          {category.description}
+                        </p>
+                        
+                        <motion.button
+                          className="w-full py-3 bg-black text-white rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors shadow-md"
+                          variants={mobileButtonVariants}
+                          whileHover="hover"
+                          whileTap="tap"
+                        >
+                          Shop Now
+                        </motion.button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Mobile Navigation Dots */}
+              {/* <div className="absolute -bottom-8 left-0 right-0 flex justify-center space-x-3">
+                {categories.map((category, index) => (
+                  <motion.button
+                    key={`dot-${category.id}`}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      displayOrder[1]?.id === category.id 
+                        ? 'bg-black scale-110' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => navigateToCategory(category.id)}
+                  />
+                ))}
+              </div> */}
+
+              {/* Progress Bar */}
+              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-black"
+                  key={displayOrder[1]?.id}
+                  initial={{ width: '0%' }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 3, ease: "linear" }}
+                />
+              </div>
+            </div>
+
+            {/* Quick Category Tabs for Mobile */}
+            <div className="flex justify-center space-x-3 mt-10 px-4">
+              {categories.map((category) => (
+                <motion.button
+                  key={`tab-${category.id}`}
+                  className={`flex-1 py-3 rounded-xl text-sm font-semibold transition-all border-2 ${
+                    displayOrder[1]?.id === category.id
+                      ? 'bg-black text-white border-black shadow-md'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
+                  }`}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigateToCategory(category.id)}
+                >
+                  {category.title}
+                </motion.button>
+              ))}
+            </div>
           </div>
-          */}
         </motion.div>
       </div>
     </div>
