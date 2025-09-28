@@ -112,7 +112,7 @@ function Footer() {
             name: "Shreya Vision Care",
             description: "Optometry-led eye clinic and optical retail center in Aligarh",
             url: "https://www.shreyavisioncare.com", // Replace with actual URL
-            logo: "https://via.placeholder.com/150x50?text=Shreya+Vision+Care", // Replace with actual logo URL
+            logo: "/logo/logo_no_bg.png", // Replace with actual logo URL
             address: {
               "@type": "PostalAddress",
               streetAddress: "Marris Road, Civil Lines",
@@ -122,15 +122,15 @@ function Footer() {
             },
             contactPoint: {
               "@type": "ContactPoint",
-              telephone: "+91-12345-67890", // Customize phone number
+              telephone: "+91-099103-35962", // Customize phone number
               contactType: "customer service",
-              email: "info@shreyavisioncare.com" // Customize email
+              email: "shreyavisioncare@gmail.com" // Customize email
             },
             sameAs: [
-              "https://www.facebook.com/shreyavisioncare", // Replace with actual profiles
-              "https://www.instagram.com/shreyavisioncare",
+              "https://www.facebook.com/people/Shreya-Vision-Care/61577959622802/", // Replace with actual profiles
+              "https://www.instagram.com/shreya_vision_care/",
               "https://twitter.com/shreyavisioncare",
-              "https://www.linkedin.com/company/shreyavisioncare"
+              "https://www.linkedin.com/company/shreya-vision-care/"
             ]
           }),
         }}
@@ -144,11 +144,11 @@ function Footer() {
         <motion.div className="flex flex-col" variants={columnVariants} custom={0}>
           <motion.div variants={logoVariants}>
             <Image // Used Next.js Image component
-              src="/logo/logo.png" // Replace with actual logo URL
+              src="/logo/logo_dark.png" // Replace with actual logo URL
               alt="Shreya Vision Care Logo - Optometry clinic in Aligarh"
               width={128} // Equivalent to w-32 (32 * 4 = 128px)
               height={40} // Adjust height as needed
-              className="w-32 mb-4"
+              className="w-62 mb-4 ml-[-10px]"
               loading="lazy" // SEO: Lazy loading for performance
             />
           </motion.div>
@@ -206,13 +206,13 @@ function Footer() {
             Contact
           </motion.h3>
           <motion.p className="text-gray-300 mb-2" variants={textVariants}>
-            Marris Road, Civil Lines, Aligarh
+            Square Tower, Marris Road, Near Bank of Maharashtra, Aligarh 202001
           </motion.p>
           <motion.p className="text-gray-300 mb-2" variants={textVariants}>
-            +91 12345 67890
+            +91 99103 35962
           </motion.p>
           <motion.p className="text-gray-300 mb-2" variants={textVariants}>
-            ✉ info@shreyavisioncare.com
+            ✉ shreyavisioncare@gmail.com
           </motion.p>
         </motion.div>
 
@@ -224,7 +224,7 @@ function Footer() {
           <div className="flex gap-4">
             <motion.a
               key="facebook"
-              href="#"
+              href="https://www.facebook.com/people/Shreya-Vision-Care/61577959622802/"
               className="hover:opacity-80 transition-opacity"
               variants={socialVariants}
               custom={0}
@@ -244,7 +244,7 @@ function Footer() {
             </motion.a>
             <motion.a
               key="instagram"
-              href="#"
+              href="https://www.instagram.com/shreya_vision_care/"
               className="hover:opacity-80 transition-opacity"
               variants={socialVariants}
               custom={1}
@@ -284,7 +284,7 @@ function Footer() {
             </motion.a>
             <motion.a
               key="linkedin"
-              href="#"
+              href="https://www.linkedin.com/company/shreya-vision-care/"
               className="hover:opacity-80 transition-opacity"
               variants={socialVariants}
               custom={3}
