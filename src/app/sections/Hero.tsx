@@ -52,17 +52,6 @@ function Hero() {
     },
   };
 
-  const imageVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { 
-        duration: 1, 
-        ease: [0.22, 1, 0.36, 1] as const 
-      } 
-    },
-  };
-
   // Button variants
   const leftButtonVariants = {
     hidden: { opacity: 0, x: -100 },
@@ -91,21 +80,18 @@ function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [slides.length]);
 
   return (
     <div className="relative h-[400px] md:h-screen w-full bg-gray-900 flex items-center justify-center text-white overflow-hidden">
-      {/* Slide Image */}
-      <motion.img
+      {/* Slide Image - Basic image changing without transition */}
+      <img
         key={currentSlide}
         src={slides[currentSlide].image}
         alt={slides[currentSlide].title}
-        variants={imageVariants}
-        initial="hidden"
-        animate="visible"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
       />
