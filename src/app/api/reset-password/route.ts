@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
+import bcrypt from "bcryptjs"; 
 import { connectDB } from "../../../../lib/mongodb";
 import User from "../../../../models/userModel";
+
 
 export async function POST(req: Request) {
   try {
@@ -32,16 +34,31 @@ export async function POST(req: Request) {
       );
     }
 
+const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    
+
     // Update user password
-    user.password = password; // MUST be hashed by your User model pre-save middleware
+    user.password = hashedPassword; // MUST be hashed by your User model pre-save middleware
     user.resetPasswordToken = undefined;
     user.resetPasswordExpiry = undefined;
 
-    await user.save();
 
-    return NextResponse.json({
-      message: "Password reset successful! You can now log in.",
-    });
+    console.log("New plain password received in reset API:", password);
+console.log("New hashed password that will be saved:", hashedPassword);
+
+
+    await user.save();
+    const response = NextResponse.json({ message: "Password reset successful! You can now log in." });
+    response.cookies.set("next-auth.session-token", "", { maxAge: 0, path: "/" });
+    response.cookies.set("next-auth.callback-url", "", { maxAge: 0, path: "/" });
+    response.cookies.set("next-auth.csrf-token", "", { maxAge: 0, path: "/" });
+
+    return response;
+
+
+    
   } catch (err: any) {
     console.error(err);
     return NextResponse.json(

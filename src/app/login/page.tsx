@@ -1,8 +1,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState, FormEvent, ChangeEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useState, FormEvent, ChangeEvent, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Joi from "joi";
 import { toast } from "react-toastify";
@@ -21,6 +21,17 @@ export default function Login() {
   });
 
   const router = useRouter();
+  const searchParams = useSearchParams(); // <-- For query params
+
+  // Toast after password reset
+  useEffect(() => {
+    const resetSuccess = searchParams.get("reset");
+    if (resetSuccess === "success") {
+      toast.success("Password reset successful! You can now login.");
+      // Remove query param from URL so toast doesn't appear again
+      router.replace("/login");
+    }
+  }, [searchParams, router]);
 
   const schema = Joi.object({
     email: Joi.string().email({ tlds: { allow: false } }).required(),
@@ -40,13 +51,18 @@ export default function Login() {
       redirect: false,
       email: formData.email,
       password: formData.password,
-      
     });
 
-    console.log("SIGNIN RESPONSE:", res);
-
     if (res?.error) {
-      toast.error("Invalid email or password");
+      setTimeout(() => {
+        if (res.error === "CredentialsSignin") {
+          toast.error("Invalid email or password");
+        } else if (res.error === "EmailNotVerified") {
+          toast.error("Please verify your email through OTP.");
+        } else {
+          toast.error(res.error);
+        }
+      }, 0);
       return;
     }
 

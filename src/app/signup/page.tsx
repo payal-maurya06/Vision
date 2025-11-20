@@ -47,9 +47,9 @@ export default function Signup() {
 
     try {
       const res = await axios.post("/api/signup", formData);
-      if (res.status === 201) {
-        toast.success("Account created successfully!");
-        router.push("/login");
+      if (res.status === 200) {
+        toast.success("OTP sent to your email");
+        router.push(`/verify-otp?email=${formData.email}`); 
       }
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Signup failed");

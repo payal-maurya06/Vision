@@ -33,7 +33,7 @@ export default function ResetPassword() {
       toast.success(response.data.message || "Password updated!");
 
       setTimeout(() => {
-        router.push("/login");
+        router.push("/login?reset=success");
       }, 1500);
     } catch (error: any) {
       toast.error(

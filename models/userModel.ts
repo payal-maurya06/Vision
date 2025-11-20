@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-import crypto from "crypto";
-import bcrypt from "bcryptjs";
+
 
 export interface IUser extends Document {
   name: string;
@@ -9,9 +8,7 @@ export interface IUser extends Document {
 
   // Email verification fields
   isVerified: boolean;
-  verifyToken: string;
-  verifyTokenExpiry: Date;
-  getVerificationToken(): string;
+  
 
   // Reset password fields
   resetPasswordToken?: string;
@@ -40,12 +37,6 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  verifyToken: {
-    type: String,
-  },
-  verifyTokenExpiry: {
-    type: Date,
-  },
 
   // RESET PASSWORD FIELDS
   resetPasswordToken: {
@@ -56,8 +47,8 @@ const UserSchema: Schema<IUser> = new mongoose.Schema({
   },
 });
 
-
-// 🔐 HASH PASSWORD BEFORE SAVE
+{/*
+//  HASH PASSWORD BEFORE SAVE
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
@@ -81,7 +72,7 @@ UserSchema.methods.getVerificationToken = function (): string {
 
   return verificationToken;
 };
-
+*/}
 
 export default mongoose.models.User ||
   mongoose.model<IUser>("User", UserSchema);

@@ -21,35 +21,39 @@ async function auth(req: NextRequest, res: any) {
           password: { label: "Password", type: "password" },
         },
 
-        async authorize(
-          credentials: Record<string, string> | undefined
-        ) {
-          await connectDB();
+       async authorize(credentials: Record<string, string> | undefined) {
+  await connectDB();
 
-          if (!credentials?.email || !credentials?.password) {
-            throw new Error("CredentialsSignin");
-          }
+  if (!credentials?.email || !credentials?.password) {
+    throw new Error("CredentialsSignin");
+  }
 
-          const user = await User.findOne({ email: credentials.email }).select("+password");
+  const user = await User.findOne({ email: credentials.email }).select("+password");
 
-          if (!user) {
-            throw new Error("CredentialsSignin");
-          }
+  if (!user || !user.password) {
+    console.log("Login failed: user not found or password missing");
+    throw new Error("CredentialsSignin");
+  }
 
-          const isPasswordMatched = await bcrypt.compare(
-            credentials.password,
-            user.password
-          );
+  const isPasswordMatched = await bcrypt.compare(
+    credentials.password.trim(),
+    user.password
+  );
 
-          if (!isPasswordMatched) {
-            throw new Error("CredentialsSignin");
-          }
-          return {
-            id: user._id.toString(),
-            name: user.name,
-            email: user.email,
-          }
-        },
+  console.log("Password matched:", isPasswordMatched);
+
+  if (!isPasswordMatched) {
+    console.log("Login failed: password incorrect");
+    throw new Error("CredentialsSignin");
+  }
+
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+  };
+}
+
       }),
 
       GoogleProvider({

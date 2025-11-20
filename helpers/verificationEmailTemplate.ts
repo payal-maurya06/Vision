@@ -1,4 +1,4 @@
-export const verificationEmailTemplate = (verificationLink: string) => {
+export const verificationEmailTemplate = (otp: string) => {
   return `
         <html>
   <head>
@@ -28,17 +28,21 @@ export const verificationEmailTemplate = (verificationLink: string) => {
       p {
         color: #666666;
         line-height: 1.5;
+        text-align: center;
       }
 
-      .button {
-        display: block;
-        margin: 0 auto;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #ffffff;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center; /* Added to center the button */
+      .otp-box {
+        margin: 20px auto;
+        background-color: #f8f8f8;
+        padding: 15px 20px;
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 10px;
+        border-radius: 8px;
+        width: fit-content;
+        border: 2px dashed #007bff;
+        color: #007bff;
+        text-align: center;
       }
 
       .expire-time {
@@ -47,25 +51,22 @@ export const verificationEmailTemplate = (verificationLink: string) => {
         color: #999999;
       }
 
-      .button:hover {
-        background-color: #0056b3;
-      }
     </style>
   </head>
+
   <body>
     <div class="container">
-      <h1>Verify Your Email Address</h1>
-      <p>
-        Thank you for signing up! To complete your registration, please click
-        the button below to verify your email address.
-      </p>
-      <a href=${verificationLink} class="button">Verify Email</a>
-      <p class="expire-time">This link will expire in 30 minutes.</p>
+      <h1>Email Verification OTP</h1>
+
+      <p>Please use the OTP below to verify your email address.</p>
+
+      <div class="otp-box">${otp}</div>
+
+      <p class="expire-time">This OTP will expire in 5 minutes.</p>
+
+      <p>If you did not request this, you can safely ignore this email.</p>
     </div>
   </body>
 </html>
-
     `;
 };
-
-

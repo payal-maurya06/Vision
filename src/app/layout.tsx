@@ -29,9 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isSpecialLayoutPage =
     pathname === "/login" ||
     pathname === "/signup" ||
-    pathname === "/verify-email" ||
+    pathname === "/verify-otp" ||
     pathname === "/forgot-password" ||   
-    pathname.startsWith("/reset-password");  
+    pathname === "/reset-password";  
 
 
   const isHomePage = pathname === "/";
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <ToastContainer position="top-right" autoClose={2000} />
-        <SessionProvider>
+        <SessionProvider refetchInterval={0}>
           
 
           {isSpecialLayoutPage ? (

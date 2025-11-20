@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer'
 
 export const sendEmail = async (userEmail: string,
     subject: string,
-    message: string) => {
+      htmlContent: string) => {
     try {
 
         const transporter = nodemailer.createTransport({
@@ -17,16 +17,17 @@ export const sendEmail = async (userEmail: string,
         });
 
         const mailOptions = {
-            from: 'Shreya Vision Care <noreply@shreyavision.com>',
+            from: '"Shreya Vision Care" <noreply@shreyavision.com>',
             to: userEmail,
             subject,
-            html: message
+               html: htmlContent,
         }
 
         const mailResponse = await transporter.sendMail(mailOptions)
         return mailResponse
 
     } catch (error: any) {
-        throw new Error(error.message)
-    }
+    console.error("Email sending failed:", error);
+    throw new Error(error.message);
+  }
 }
